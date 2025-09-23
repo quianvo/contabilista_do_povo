@@ -1,0 +1,59 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: php_default_api
+    ports:
+      - "8000:80"
+    volumes:
+      - .:/var/www/html
+      - ./apache-config/000-default.conf:/etc/apache2/sites-available/000-default.conf
+    environment:
+      - DB_HOST=postgres_db
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASS=${DB_PASS}
+      - DOCKER_ENV=true
+    depends_on:
+      - postgres_db
+    networks:
+      - api_network
+    restart: unless-stopped
+
+  postgres_db:
+    image: postgres:16
+    container_name: postgres_db
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql # se tiver script inicial
+    networks:
+      - api_network
+    restart: unless-stopped
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "8080:80"
+    depends_on:
+      - postgres_db
+    networks:
+      - api_network
+    restart: unless-stopped
+
+networks:
+  api_network:
+    driver: bridge
+
+volumes:
+  pg_data:
