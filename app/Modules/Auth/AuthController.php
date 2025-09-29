@@ -38,4 +38,38 @@ class AuthController
             echo json_encode(["message" => "Invalid credentials"]);
         }
     }
+
+    public function me()
+    {
+        $headers = getallheaders();
+        if (!isset($headers['Authorization'])) {
+            http_response_code(401);
+            echo json_encode(["message" => "Token não fornecido"]);
+            return;
+        }
+
+        $token = str_replace('Bearer ', '', $headers['Authorization']);
+
+        try {
+            if (\App\Core\Auth::check()) {
+                $payload = \App\Core\Auth::user();
+                http_response_code(200);
+                echo json_encode([
+                    "message" => "Token válido",
+                    "user" => $payload
+                ]);
+            } else {
+                http_response_code(401);
+                echo json_encode(["message" => "Token inválido ou expirado"]);
+            }
+            http_response_code(200);
+            echo json_encode([
+                "message" => "Token válido",
+                "user" => $payload
+            ]);
+        } catch (\Exception $e) {
+            http_response_code(401);
+            echo json_encode(["message" => "Token inválido ou expirado"]);
+        }
+    }
 }

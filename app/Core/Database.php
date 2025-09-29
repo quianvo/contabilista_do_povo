@@ -17,12 +17,6 @@ class Database {
             $dbUser = $_ENV['DB_USER'] ;
             $dbPass = $_ENV['DB_PASS'] ;
             $dbPort = $_ENV['DB_PORT'] ;
-
-            // $dbHost = "dpg-d347adre5dus73eph6v0-a" ;
-            // $dbName = "default_scd3" ;
-            // $dbUser = "default_scd3_user";
-            // $dbPass = "eyO6wYUv5vQMU2l6BJ2etaZlqU7yvSBx";
-            // $dbPort = 5432 ;
             } catch (\Exception $e) {
                 // Ignora erro se .env não existir (produção)
             }

@@ -31,6 +31,8 @@ $router = new Router();
 // Rotas Auth
 $router->add("POST", "/auth/register", [new AuthController, "register"]);
 $router->add("POST", "/auth/login", [new AuthController, "login"]);
+$router->add("GET", "/auth/me", [new AuthController, "me"]);
+
 
 // Rotas Posts
 $router->add("GET", "/posts/category/{category}", [new PostController, "getByCategory"]);

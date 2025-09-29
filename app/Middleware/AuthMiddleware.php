@@ -18,6 +18,7 @@ class AuthMiddleware extends \App\Core\Middleware
         'GET:/categories',
         'GET:/categories/{id}',
         'POST:/contacts',
+        'GET:/auth/me'
     ];
 
     public function handle($request, $next)
