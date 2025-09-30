@@ -16,6 +16,11 @@ class PostService
         return PostModel::getPosts($category, $page, $perPage);
     }
 
+    public function getAll(): array
+    {
+        return PostModel::getAllPosts();
+    }
+
     public function getPostById($id)
     {
         $post = PostModel::find($id);

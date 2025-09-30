@@ -37,6 +37,7 @@ $router->add("GET", "/auth/me", [new AuthController, "me"]);
 // Rotas Posts
 $router->add("GET", "/posts/category/{category}", [new PostController, "getByCategory"]);
 $router->add("GET", "/posts", [new PostController, "index"]);
+$router->add("GET", "/posts/all", [new PostController, "all"]);
 $router->add("POST", "/posts", [new PostController, "create"]);
 $router->add("GET", "/posts/{id}", [new PostController, "show"]);
 $router->add("PUT", "/posts/{id}", [new PostController, "update"]);

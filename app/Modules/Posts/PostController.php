@@ -31,6 +31,16 @@ class PostController
         }
     }
 
+    public function all()
+    {
+        try {
+            $result = $this->postService->getAll();
+            Response::json($result);
+        } catch (\Exception $e) {
+            Response::json(['error' => $e->getMessage()], 500);
+        }
+    }
+
     public function show($id)
     {
         $post = $this->postService->getPostById($id);
