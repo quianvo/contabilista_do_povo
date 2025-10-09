@@ -53,7 +53,11 @@ class PostService
         }
 
         $updateData = array_merge($currentPost, $data);
-        unset($updateData['id'], $updateData['created_at']);
+        unset(
+            $updateData['id'],
+            $updateData['created_at'],
+            $updateData['category_name']
+        );
 
         $success = PostModel::update($id, $updateData);
 

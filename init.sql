@@ -75,6 +75,7 @@ CREATE SEQUENCE IF NOT EXISTS public.posts_id_seq
 
 ALTER TABLE public.posts ALTER COLUMN id SET DEFAULT nextval('public.posts_id_seq'::regclass);
 
+ALTER TABLE posts DROP CONSTRAINT posts_category_check;
 -- ================================
 -- Inserindo dados iniciais
 -- ================================
@@ -95,8 +96,8 @@ SELECT setval('public.categories_id_seq', 5, true);
 -- Contatos
 INSERT INTO public.contacts (id, name, email, topic, content, created_at, viewed, telephone) VALUES
 (2, 'João Silva', 'joao@email.com', 'Suporte', 'Estou com dificuldade em acessar minha conta.', '2025-09-14 19:50:04.295014', true, NULL),
-(3, 'João Silva', 'joao@email.com', 'Suporte', 'Estou com dificuldade em acessar minha conta.', '2025-09-15 17:43:29.834478', false, 'Estou com dificuldade em acessar minha conta.'),
-(4, 'João Silva', 'joao@email.com', 'Suporte', 'Estou com dificuldade em acessar minha conta.', '2025-09-15 17:44:14.205155', false, 'Estou com dificuldade em acessar minha conta.'),
+(3, 'João Silva', 'joao@email.com', 'Suporte', 'Estou com dificuldade em acessar minha conta.', '2025-09-15 17:43:29.834478', false, '944880743'),
+(4, 'João Silva', 'joao@email.com', 'Suporte', 'Estou com dificuldade em acessar minha conta.', '2025-09-15 17:44:14.205155', false, '944880743 '),
 (5, 'João Silva', 'joao@email.com', 'Suporte', 'Estou com dificuldade em acessar minha conta.', '2025-09-15 17:46:01.840938', false, '944880743'),
 (6, 'João Silva', 'joao@email.com', 'Suporte', 'Estou com dificuldade em acessar minha conta.', '2025-09-15 17:46:19.65134', false, '944880743'),
 (7, 'João Silva', 'joao@email.com', 'Suporte', 'Estou com dificuldade em acessar minha conta.', '2025-09-15 18:11:20.28963', false, '944880743')
